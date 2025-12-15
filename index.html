@@ -154,7 +154,7 @@ nextBtn.onclick = () => {
   nextBtn.style.display = "none";
 
   function updateCountdown() {
-    const startDate = new Date("2024-02-14T00:00:00");
+    const startDate = new Date("2025-02-14T00:00:00");
     const now = new Date();
 
     let diff = now - startDate;
@@ -167,7 +167,7 @@ nextBtn.onclick = () => {
     const seconds = totalSeconds % 60;
 
     countdownEl.textContent =
-      `Time spent loving u:\n${days} days ${hours} hours ${minutes} minutes ${seconds} seconds ❤️`;
+      `Time spent loving u:\n${days} D ${hours} H ${minutes} M ${seconds} S ❤️`;
   }
 
   updateCountdown();
