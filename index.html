@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Do You Love Me?</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-image: url('Love Background Wallpapers Backgrounds, Love, Love Background, Love Wallpaper Background Image And Wallpaper for Free Download.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.25);
+  z-index: 0;
+}
+
+.card {
+  background: rgba(255,255,255,0.97);
+  padding: 70px 50px 90px;
+  border-radius: 32px;
+  text-align: center;
+  box-shadow: 0 30px 55px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+  width: min(520px, 92%);
+}
+
+h1 {
+  color: #ff4f6d;
+  font-size: clamp(32px, 6vw, 40px);
+  margin-bottom: 35px;
+}
+
+button {
+  padding: 16px 50px;
+  font-size: clamp(18px, 5vw, 26px);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+#yesBtn { background: linear-gradient(180deg, #6fdc6f, #3cbf3c); color: white; }
+#noBtn { background: linear-gradient(180deg, #ff6b6b, #ff3b3b); color: white; position: absolute; }
+#nextBtn { background: linear-gradient(180deg, #ff8c42, #ff5e5e); color: white; display: none; }
+
+#message, #secondMessage, #countdown {
+  display: none;
+  margin-top: 20px;
+  font-size: clamp(20px, 6vw, 28px);
+  color: #e61235;
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+/* BIG + SLOW TEDDIES */
+.teddy {
+  position: absolute;
+  animation: teddyFloat 7s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes teddyFloat {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(-95vh) scale(1.15);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Do u think Younes loves you 🤔??</h1>
+
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😏</button>
+
+  <div id="message">Ofccc😚 More than words can explain Sweetieeee 🤭❤️</div>
+  <button id="nextBtn">🥰</button>
+
+  <div id="secondMessage">
+    my love for you Rihabbb is real, constant, and forever !❤️
+  </div>
+
+  <div id="countdown"></div>
+</div>
+
+<audio id="loveSong" src="beabadoobee Glue Song Lyrics.mp3" loop autoplay></audio>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("message");
+const nextBtn = document.getElementById("nextBtn");
+const secondMessage = document.getElementById("secondMessage");
+const countdownEl = document.getElementById("countdown");
+const card = document.querySelector(".card");
+const song = document.getElementById("loveSong");
+
+// YES BUTTON
+yesBtn.onclick = () => {
+  song.volume = 0.8;
+  song.play();
+
+  message.style.display = "block";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  nextBtn.style.display = "block";
+
+  const teddyCount = 15; // MORE TEDDIES
+  const spacing = window.innerWidth / teddyCount;
+
+  for (let i = 0; i < teddyCount; i++) {
+    const teddy = document.createElement("div");
+    teddy.className = "teddy";
+    teddy.textContent = "🧸";
+
+    const size = 130 + Math.random() * 70; // 130px → 200px
+    teddy.style.fontSize = size + "px";
+
+    teddy.style.left = (i * spacing + Math.random() * 30) + "px";
+    teddy.style.top = window.innerHeight + 50 + "px";
+
+    document.body.appendChild(teddy);
+    setTimeout(() => teddy.remove(), 7500);
+  }
+};
+
+// 🥰 BUTTON
+nextBtn.onclick = () => {
+  secondMessage.style.display = "block";
+  countdownEl.style.display = "block";
+  nextBtn.style.display = "none";
+
+  function updateCountdown() {
+    const startDate = new Date("2024-02-14T00:00:00");
+    const now = new Date();
+
+    let diff = now - startDate;
+    if (diff < 0) diff = 0;
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    countdownEl.textContent =
+      `Time spent loving u:\n${days} days ${hours} hours ${minutes} minutes ${seconds} seconds ❤️`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+};
+
+// NO BUTTON
+function moveNo() {
+  const padding = 10;
+  const maxX = card.clientWidth - noBtn.offsetWidth - padding;
+  const maxY = card.clientHeight - noBtn.offsetHeight - padding;
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+</script>
+
+</body>
+</html>
